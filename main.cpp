@@ -78,7 +78,9 @@ int main()
     }
 
     // sort planets in order of habitability
-    bubbleSort(planets, [](const Planet *a, const Planet *b) {return *a > *b;});
+    bubbleSort(planets, [](const Planet *a, const Planet *b) {
+        return *a > *b;
+    });
 
     // display the most habitable exoplanet
     cout << endl
@@ -123,7 +125,7 @@ double computeHabitability(const Planet &planet)
 
     // derived properties
     double volume = 4.0*M_PI*pow(r*1.0E2, 3)/3.0;   // volume in cm^3
-    double rho    = m/volume;                       // density in g/cm^3
+    double rho    = (m*1000)/volume;                       // density in g/cm^3
     double ve     = sqrt(2.0*G_CONST*m/r);          // escape velocity in m/s
 
     // convert to Earth Units

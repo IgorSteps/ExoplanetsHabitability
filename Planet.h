@@ -41,7 +41,7 @@ public:
 
     //Constructors
     Planet()=default;
-    Planet(const std::string name, std::string system, std::string method,
+    Planet(const std::string& name, std::string system, std::string method,
            int year, std::string facility,  double radius, double mass,
            int temperature,  double habitability)
     {

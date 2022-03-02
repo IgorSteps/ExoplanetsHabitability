@@ -1,7 +1,7 @@
 /******************************************************************************
 File:         main.cpp
 Date:         18th January 2022
-Author:       Gawin Crawley, Igor Stepanenko
+Author:       Gavin Crawley, Igor Stepanenko
 Description:  Prototype implementation of a program to identify the most
               habitable exoplanets, according to the Earth Similarity Index;
 Notes:        The following errors were found in the code supplied:
@@ -68,6 +68,8 @@ int main()
         planets.push_back(newPtr);
     }
     is.close();
+    delete p;
+
 
     // compute the habitability index for each exoplanet
     for (Planet *exoplanet : planets)
@@ -76,7 +78,7 @@ int main()
     }
 
     // sort planets in order of habitability
-    bubbleSort(planets, [](const Planet* a, const Planet* b) {return *a > *b;});
+    bubbleSort(planets, [](const Planet *a, const Planet *b) {return *a > *b;});
 
     // display the most habitable exoplanet
     cout << endl
@@ -92,6 +94,7 @@ int main()
         os << describePlanet(*planets[i]) << endl;
     }
     os.close();
+
 
     return 0;
 }
@@ -109,7 +112,7 @@ Notes       : More verbose than strictly necessary in order to remain
 
 inline double BCSI(double x, double x0, double w)
 {
-    return pow(1 - abs(x - x0)/(x + x0), w);     //BUG 4
+    return pow(1 - abs(x - x0)/(x + x0), w);
 }
 
 double computeHabitability(const Planet &planet)
@@ -156,24 +159,25 @@ Description:  Basic implementation of bubble sort, implemented as a template
 template <typename T, typename F> void bubbleSort(vector<T>& vec, F compare)
 {
     bool sorted;
+    int iter=vec.size()-1;
     do
     {
         sorted = true;
-        for (size_t i = 1; i < vec.size()-1; i++)
+        for (size_t i = 1; i < iter; i++)
         {
             if (compare(vec[i],vec[i-1]))
             {
-                T  temp  = vec[i];
-                vec[i]   = vec[i-1];
+                T temp  = vec[i];
+                vec[i] = vec[i-1];
                 vec[i-1] = temp;
                 sorted = false;
             }
         }
+        iter--;
     }
     while (!sorted);
 
 }
-
 
 /******************************************************************************
 Function:    describePlanet
